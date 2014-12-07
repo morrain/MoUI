@@ -31,6 +31,9 @@
       </div>
       <div class="bs-docs-example">
           <p>
+            <input type="checkbox" checked data-size="large">
+            <input type="checkbox" checked data-size="normal">
+            <input type="checkbox" checked data-size="small">
             <input id="switch-size" type="checkbox" checked data-size="mini">
           </p>
           <div class="btn-group">
@@ -42,6 +45,9 @@
           </div>
       </div>
       <pre><code>
+&lt;input type="checkbox" checked data-size="large"&gt;
+&lt;input type="checkbox" checked data-size="normal"&gt;
+&lt;input type="checkbox" checked data-size="small"&gt;
 &lt;input id="switch-size" type="checkbox" checked data-size="mini"&gt;
 $('#switch-size').MoUISwitch('size','mini');
 $('#switch-size').MoUISwitch('size','small');
@@ -49,9 +55,68 @@ $('#switch-size').MoUISwitch('size','normal');
 $('#switch-size').MoUISwitch('size','large');
 alert($('#switch-size').MoUISwitch('size'));
       </code></pre>
+      <div>
+        <h2 class="page-header">State</h2>
+      </div>
+      <div class="bs-docs-example">
+          <p>
+            <input id="switch-state" type="checkbox" checked>
+          </p>
+          <div class="btn-group">
+            <button type="button" data-switch-toggle="state" class="btn btn-default">Toggle</button>
+            <button type="button" data-switch-set="state" data-switch-value="true" class="btn btn-default">Set true</button>
+            <button type="button" data-switch-set="state" data-switch-value="false" class="btn btn-default">Set false</button>
+            <button type="button" data-switch-get="state" class="btn btn-default">Get</button>
+          </div>
+      </div>
+      <pre><code>
+&lt;input id="switch-state" type="checkbox" checked&gt;
+$('#switch-state').MoUISwitch('toggleState');
+$('#switch-state').MoUISwitch('state',true);
+$('#switch-state').MoUISwitch('state',false);
+alert($('#switch-state').MoUISwitch('state'));
+      </code></pre>
+      <div>
+        <h2 class="page-header">Colors</h2>
+      </div>
+      <div class="bs-docs-example">
+          <p>
+            <input type="checkbox" data-options='{"onColor":"primary"}' checked>
+            <input type="checkbox" data-options='{"onColor":"info"}' checked>
+            <input type="checkbox" data-options='{"onColor":"success"}' checked>
+            <input type="checkbox" data-options='{"onColor":"warning"}' checked>
+            <input type="checkbox" data-options='{"onColor":"danger"}' checked>
+            <input id="switch-onColor" type="checkbox" data-options='{"onColor":"default"}' checked>
+          </p>
+          <p class="btn-group">
+            <div class="btn-group">
+              <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle">Set &nbsp;<span class="caret"></span></button>
+              <div role="menu" class="dropdown-menu">
+                <li><a data-switch-set="onColor" data-switch-value="primary">Primary</a></li>
+                <li><a data-switch-set="onColor" data-switch-value="info">Info</a></li>
+                <li><a data-switch-set="onColor" data-switch-value="success">Success</a></li>
+                <li><a data-switch-set="onColor" data-switch-value="warning">Warning</a></li>
+                <li><a data-switch-set="onColor" data-switch-value="danger">Danger</a></li>
+                <li><a data-switch-set="onColor" data-switch-value="default">Default</a></li>
+              </div>
+            </div>
+            <button type="button" data-switch-get="onColor" class="btn btn-default">Get</button>
+          </p>
+      </div>
+      <pre><code>
+&lt;input type="checkbox" data-options='{"onColor":"primary"}' checked&gt;
+&lt;input type="checkbox" data-options='{"onColor":"info"}' checked&gt;
+&lt;input type="checkbox" data-options='{"onColor":"success"}' checked&gt;
+&lt;input type="checkbox" data-options='{"onColor":"warning"}' checked&gt;
+&lt;input type="checkbox" data-options='{"onColor":"danger"}' checked&gt;
+&lt;input id="switch-onColor" type="checkbox" checked&gt;
+$('switch-onColor').MoUISwitch('onColor','default');
+alert($('#switch-onColor').MoUISwitch('onColor'));
+      </code></pre>
     </div>
     <script src="../doc.js"></script>
     <script src="../../lib/jquery-2.1.1.js"></script>
+    <script src="../../lib/bootstrap.js"></script>
     <script src="MoUI-switch.js"></script>
     <script>
         // initialize all the inputs
