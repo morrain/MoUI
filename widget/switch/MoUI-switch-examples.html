@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>examples</title>
+    <link href="../../lib/bootstrap.css" rel="stylesheet">
+    <link href="MoUI-switch.css" rel="stylesheet">
+    <link href="../doc.css" rel="stylesheet">
+  </head>
+  <body>
+    <header role="banner" class="navbar navbar-default navbar-fixed-top top">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand">MoUI Switch</a>
+        </div>
+        <nav id="collapse" role="navigation" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="MoUI-switch-start.html">Start</a></li>
+            <li><a href="MoUI-switch-examples.html">Examples</a></li>
+            <li><a href="MoUI-switch-document.html">Documentation</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <div class="container content">
+      <h1 class="page-header">Examples &nbsp;</h1>
+      <div>
+        <h2 class="page-header">Size</h2>
+      </div>
+      <div class="bs-docs-example">
+          <p>
+            <input id="switch-size" type="checkbox" checked data-size="mini">
+          </p>
+          <div class="btn-group">
+            <button type="button" data-switch-set="size" data-switch-value="mini" class="btn btn-default">Mini</button>
+            <button type="button" data-switch-set="size" data-switch-value="small" class="btn btn-default">Small</button>
+            <button type="button" data-switch-set="size" data-switch-value="normal" class="btn btn-default">Normal</button>
+            <button type="button" data-switch-set="size" data-switch-value="large" class="btn btn-default">Large</button>
+            <button type="button" data-switch-get="size" class="btn btn-default">Get</button>
+          </div>
+      </div>
+      <pre><code>
+&lt;input id="switch-size" type="checkbox" checked data-size="mini"&gt;
+$('#switch-size').MoUISwitch('size','mini');
+$('#switch-size').MoUISwitch('size','small');
+$('#switch-size').MoUISwitch('size','normal');
+$('#switch-size').MoUISwitch('size','large');
+alert($('#switch-size').MoUISwitch('size'));
+      </code></pre>
+    </div>
+    <script src="../doc.js"></script>
+    <script src="../../lib/jquery-2.1.1.js"></script>
+    <script src="MoUI-switch.js"></script>
+    <script>
+        // initialize all the inputs
+        $('input[type="checkbox"], input[type="radio"]:not("#switch-create-destroy, #switch-modal")').MoUISwitch();
+
+        $('[data-switch-get]').on("click", function () {
+            var type = $(this).data('switch-get');
+
+            alert($('#switch-' + type).MoUISwitch(type));
+        });
+
+        $('[data-switch-set]').on('click', function () {
+            var type = $(this).data('switch-set');
+
+            $('#switch-' + type).MoUISwitch(type, $(this).data('switch-value'));
+        });
+
+        $('[data-switch-toggle]').on('click', function () {
+            var type = $(this).data('switch-toggle');
+
+            $('#switch-' + type).MoUISwitch('toggle' + type.charAt(0).toUpperCase() + type.slice(1));
+        });
+
+        $('[data-switch-set-value]').on('input', function (event) {
+            event.preventDefault();
+            var type = $(this).data('switch-set-value');
+            var value = $.trim($(this).val());
+
+            if ($(this).data('value') == value) {
+                return;
+            }
+
+            $('#switch-' + type).MoUISwitch(type, value);
+        });
+
+        $('[data-switch-create-destroy]').on('click', function () {
+            var isSwitch = $createDestroy.data('bootstrap-switch');
+
+            $createDestroy.MoUISwitch(isSwitch ? 'destroy' : null);
+            $(this).button(isSwitch ? 'reset' : 'destroy');
+        });
+    </script>
+  </body>
+</html>

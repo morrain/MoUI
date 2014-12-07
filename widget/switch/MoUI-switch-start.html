@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>start</title>
+    <link href="../../lib/bootstrap.css" rel="stylesheet">
+    <link href="MoUI-switch.css" rel="stylesheet">
+    <link href="../doc.css" rel="stylesheet">
+  </head>
+  <body>
+    <header role="banner" class="navbar navbar-default navbar-fixed-top top">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand">MoUI Switch</a>
+        </div>
+        <nav id="collapse" role="navigation" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="MoUI-switch-start.html">Start</a></li>
+            <li><a href="MoUI-switch-examples.html">Examples</a></li>
+            <li><a href="MoUI-switch-document.html">Documentation</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <div class="container content">
+      <h1 class="page-header">Getting Started</h1>
+      <p>Include the dependencies: jQuery, Bootstrap and MoUI Switch CSS + Javascript.</p>
+      <pre><code>
+&lt;link href="bootstrap.css" rel="stylesheet"&gt;
+&lt;link href="MoUI-switch.css" rel="stylesheet"&gt;
+&lt;script src="jquery.js"&gt;&lt;/script&gt;
+&lt;script src="MoUI-switch.js"&gt;&lt;/script&gt;
+      </code></pre>
+      <p>Add your checkbox.</p>
+      <pre><code>&lt;input type="checkbox" name="my-checkbox" checked&gt;</code></pre>
+      <p>Initialize MoUI Switch.</p>
+      <pre><code>$("[name='my-checkbox']").MoUISwitch();</code></pre>
+      <p>Enjoy It</p>
+      <div class="text-center"><a href="MoUI-switch-examples.html" class="btn btn-lg btn-info">See Examples</a>&nbsp;<a href="MoUI-switch-document.html" class="btn btn-lg btn-default">Browse Documentation</a></div>
+    </div>
+    <script src="../doc.js"></script>
+  </body>
+</html>
