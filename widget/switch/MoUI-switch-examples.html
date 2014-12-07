@@ -110,8 +110,114 @@ alert($('#switch-state').MoUISwitch('state'));
 &lt;input type="checkbox" data-options='{"onColor":"warning"}' checked&gt;
 &lt;input type="checkbox" data-options='{"onColor":"danger"}' checked&gt;
 &lt;input id="switch-onColor" type="checkbox" checked&gt;
-$('switch-onColor').MoUISwitch('onColor','default');
+$('#switch-onColor').MoUISwitch('onColor','default');
 alert($('#switch-onColor').MoUISwitch('onColor'));
+      </code></pre>
+      <div>
+        <h2 class="page-header">Animation</h2>
+      </div>
+      <div class="bs-docs-example">
+          <p>
+            <input id="switch-animate" type="checkbox" checked>
+          </p>
+          <div class="btn-group">
+            <button type="button" data-switch-toggle="animate" class="btn btn-default">Toggle</button>
+            <button type="button" data-switch-get="animate" class="btn btn-default">Get</button>
+          </div>
+      </div>
+      <pre><code>
+&lt;input id="switch-animate" type="checkbox" checked&gt;
+$('#switch-animate').MoUISwitch('toggleAnimate');
+alert($('#switch-animate').MoUISwitch('animate'));
+      </code></pre>
+      <div>
+        <h2 class="page-header">Disabled</h2>
+      </div>
+      <div class="bs-docs-example">
+          <p>
+            <input id="switch-disabled" type="checkbox" checked disabled>
+          </p>
+          <div class="btn-group">
+            <button type="button" data-switch-toggle="disabled" class="btn btn-default">Toggle</button>
+            <button type="button" data-switch-get="disabled" class="btn btn-default">Get</button>
+          </div>
+      </div>
+      <pre><code>
+&lt;input id="switch-disabled" type="checkbox" checked disabled&gt;
+$('#switch-disabled').MoUISwitch('toggleDisabled');
+alert($('#switch-disabled').MoUISwitch('disabled'));
+      </code></pre>
+      <div>
+        <h2 class="page-header">Text</h2>
+      </div>
+      <div class="bs-docs-example">
+          <p>
+            <input id="switch-onText" type="checkbox" data-options='{"onText":"Yes"}' checked>
+            <input id="switch-labelText" type="checkbox" data-options='{"labelText":"label"}' checked>
+            <input id="switch-offText" type="checkbox" data-options='{"offText":"No"}'>
+          </p>
+          <p>
+            <input type="text" data-switch-set-value="onText" value="Yes" class="form-control">
+            <input type="text" data-switch-set-value="labelText" value="label" class="form-control">
+            <input type="text" data-switch-set-value="offText" value="No" class="form-control">
+          </p>
+      </div>
+      <pre><code>
+&lt;input id="switch-onText" type="checkbox" data-options='{"onText":"Yes"}' checked&gt;
+&lt;input id="switch-labelText" type="checkbox" data-options='{"labelText":"label"}' checked&gt;
+&lt;input id="switch-offText" type="checkbox" data-options='{"offText":"No"}' &gt;
+$('#switch-onText').MoUISwitch('onText','Yes');
+$('#switch-labelText').MoUISwitch('labelText','label');
+$('#switch-offText').MoUISwitch('offText','No');
+      </code></pre>
+      <div>
+        <h2 class="page-header">Width</h2>
+      </div>
+      <div class="bs-docs-example">
+          <p>
+            <input id="switch-labelWidth" type="checkbox" data-options='{"labelWidth":100}' checked>
+            <input id="switch-handleWidth" type="checkbox" data-options='{"handleWidth":100}' checked>
+          </p>
+          <p>
+            <input type="text" data-switch-set-value="labelWidth" value=100 class="form-control">
+            <input type="text" data-switch-set-value="handleWidth" value=100 class="form-control">
+          </p>
+      </div>
+      <pre><code>
+&lt;input id="switch-labelWidth" type="checkbox" data-options='{"labelWidth":100}' checked&gt;
+&lt;input id="switch-handleWidth" type="checkbox" data-options='{"handleWidth":100}' checked&gt;
+$('#switch-labelWidth').MoUISwitch('labelWidth',100);
+$('#switch-handleWidth').MoUISwitch('handleWidth',100);
+      </code></pre>
+      <div>
+        <h2 class="page-header">Event Handle</h2>
+      </div>
+      <div class="bs-docs-example">
+          <p>
+            <input id="switch-event" type="checkbox" checked>
+          </p>
+      </div>
+      <pre><code>
+&lt;input id="switch-event" type="checkbox" checked&gt;
+$('#switch-event').MoUISwitch('onSwitchChange', function (event, data) {
+    console.log(event, data);
+});
+      </code></pre>
+      <div>
+        <h2 class="page-header">Create Destroy</h2>
+      </div>
+      <div class="bs-docs-example">
+          <p>
+            <input id="switch-create-destroy" type="checkbox" checked>
+          </p>
+          <p>
+            <button type="button" data-switch-create-destroy data-destroy-text="Destroy" class="btn btn-default">Create</button>
+          </p>
+      </div>
+      <pre><code>
+&lt;input id="switch-create-destroy" type="checkbox" checked&gt;
+$('#witch-create-destroy').MoUISwitch('destroy');
+$('#witch-create-destroy').MoUISwitch();
       </code></pre>
     </div>
     <script src="../doc.js"></script>
@@ -153,10 +259,14 @@ alert($('#switch-onColor').MoUISwitch('onColor'));
         });
 
         $('[data-switch-create-destroy]').on('click', function () {
-            var isSwitch = $createDestroy.data('bootstrap-switch');
+            var isSwitch = $('#switch-create-destroy').data('bootstrap-switch');
 
-            $createDestroy.MoUISwitch(isSwitch ? 'destroy' : null);
+            $('#switch-create-destroy').MoUISwitch(isSwitch ? 'destroy' : null);
             $(this).button(isSwitch ? 'reset' : 'destroy');
+        });
+
+        $('#switch-event').MoUISwitch('onSwitchChange', function (event, data) {
+            console.log(event, data);
         });
     </script>
   </body>
