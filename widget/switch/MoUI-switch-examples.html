@@ -259,7 +259,7 @@ $('#witch-create-destroy').MoUISwitch();
         });
 
         $('[data-switch-create-destroy]').on('click', function () {
-            var isSwitch = $('#switch-create-destroy').data('bootstrap-switch');
+            var isSwitch = $('#switch-create-destroy').data('MoUI-switch');
 
             $('#switch-create-destroy').MoUISwitch(isSwitch ? 'destroy' : null);
             $(this).button(isSwitch ? 'reset' : 'destroy');
