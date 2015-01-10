@@ -130,11 +130,13 @@ author:morrain
             //鼠标移入时暂停播放，移出时继续播放
             if (_.o.pause) {
                 ele.bind({
-                    'mousemove': function () {
-                        _.stop()
+                    'mouseover': function () {
+                        _.stop();
+                        _.showArrow(true);
                     },
                     'mouseout': function () {
                         _.play();
+                        _.showArrow(false);
                     }
                 });
             };
@@ -155,6 +157,7 @@ author:morrain
         //添加点和箭头导航
         _.o.dot && _._nav('dot');
         _.o.arrow && _._nav('arrow');
+        _.showArrow(false); //默认隐藏，当鼠标移入时显示
 
         //图片自适应调整
         _.o.fluid && $(window).resize(function () {
@@ -283,7 +286,11 @@ author:morrain
                 'background-image': function () {
                     return 'url(img/' + _.o[name] + '.png)';
                 }
-            });;
+            });
+    };
+
+    MoUISlider.prototype.showArrow = function (b_show) {
+        b_show ? this.ele.find('.arrow').show() : this.ele.find('.arrow').hide();
     };
 
 })(jQuery);
