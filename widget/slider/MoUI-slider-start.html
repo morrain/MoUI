@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>start</title>
+    <link href="../../lib/bootstrap.css" rel="stylesheet">
+    <link href="MoUI-slider.css" rel="stylesheet">
+    <link href="../doc.css" rel="stylesheet">
+  </head>
+  <body>
+    <header role="banner" class="navbar navbar-default navbar-fixed-top top">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand">MoUI Slider</a>
+        </div>
+        <nav id="collapse" role="navigation" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="MoUI-slider-start.html">Start</a></li>
+            <li><a href="MoUI-slider-examples.html">Examples</a></li>
+            <li><a href="MoUI-slider-document.html">Documentation</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <div class="container content">
+      <h1 class="page-header">Getting Started</h1>
+      <p>Include the dependencies: jQuery, MoUI slider CSS + Javascript.</p>
+      <pre><code>
+&lt;link href="MoUI-slider.css" rel="stylesheet"&gt;
+&lt;script src="jquery.js"&gt;&lt;/script&gt;
+&lt;script src="MoUI-slider.js"&gt;&lt;/script&gt;
+      </code></pre>
+      <p>Add your slider html.</p>
+      <pre><code>
+&lt;div class="slider"&gt;
+  &lt;ul&gt;
+    &lt;li style="background-image: url('img/sunset.jpg');"&gt;&lt;/li&gt;
+    &lt;li style="background-image: url('img/wood.jpg');"&gt;&lt;/li&gt;
+    &lt;li style="background-image: url('img/subway.jpg');"&gt;&lt;/li&gt;
+    &lt;li style="background-image: url('img/shop.jpg');"&gt;&lt;/li&gt;    
+  &lt;/ul&gt;
+&lt;/div&gt;
+      </code></pre>
+      <p>Initialize MoUI slider.</p>
+      <pre><code>$('.slider').MoUISlider();</code></pre>
+      <p>Enjoy It</p>
+      <div class="text-center"><a href="MoUI-slider-examples.html" class="btn btn-lg btn-info">See Examples</a>&nbsp;<a href="MoUI-slider-document.html" class="btn btn-lg btn-default">Browse Documentation</a></div>
+    </div>
+    <script src="../doc.js"></script>
+  </body>
+</html>

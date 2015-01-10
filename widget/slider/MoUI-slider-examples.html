@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>examples</title>
+    <link href="../../lib/bootstrap.css" rel="stylesheet">
+    <link href="MoUI-slider.css" rel="stylesheet">
+    <link href="../doc.css" rel="stylesheet">
+  </head>
+  <body>
+    <header role="banner" class="navbar navbar-default navbar-fixed-top top">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand">MoUI Switch</a>
+        </div>
+        <nav id="collapse" role="navigation" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="MoUI-slider-start.html">Start</a></li>
+            <li><a href="MoUI-slider-examples.html">Examples</a></li>
+            <li><a href="MoUI-slider-document.html">Documentation</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <div class="container content">
+      <h1 class="page-header">Examples &nbsp;</h1>
+      <div class="slider">
+        <ul>
+          <li style="background-image: url('img/shuang.jpg');">
+            <div class="inner">
+              <h1>The jQuery slider that just slides.</h1>
+              <p>No fancy effects or unnecessary markup, and it’s less than 3kb.</p>
+              <a class="btn" href="#download">Download</a>
+            </div>
+          </li>
+          <li style="background-image: url('img/erhai.jpg');">
+            <div class="inner">
+              <h1>Fluid, flexible, fantastically minimal.</h1>
+              <p>Use any HTML in your slides, extend with CSS. You have full control.</p>
+              <a class="btn" href="#download">Download</a>
+            </div>
+          </li>
+          <li style="background-image: url('img/dali.jpg');">
+            <div class="inner">
+              <h1>Open-source.</h1>
+              <p>Everything to do with Unslider is hosted on GitHub.</p>
+              <a class="btn" href="//github.com/idiot/unslider">Contribute</a>
+            </div>
+          </li>
+          <li style="background-image: url('img/erhai1.jpg');">
+            <div class="inner">
+              <h1>Uh, that’s about it.</h1>
+              <p>I just wanted to show you another slide.</p>
+              <a class="btn" href="#download">Download</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <script src="../doc.js"></script>
+    <script src="../../lib/jquery-2.1.1.js"></script>
+    <script src="MoUI-slider.js"></script>
+    <script>
+      $('.slider').MoUISlider({
+          arrows: true,
+          fluid: true,
+          dots: true
+      });
+    </script>
+  </body>
+</html>
