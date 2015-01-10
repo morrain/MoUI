@@ -14,8 +14,9 @@ author:morrain
         pause: true, // 鼠标移入进是否暂停
         loop: true, // 是否循环，最后一张再下一个会循环到第一张
         keys: false, // 是否支持键盘播放
-        dots: true, // 是否显示点导航条
-        arrows: false, // 是否显示箭头导航条
+        dot: 'd01', // 点导航条样式。为空不显示
+        arrow: 'a05', //箭头的样式。为空不显示箭头
+        arrowspad: 0, // 箭头导航条距离两边的像素长度
         prev: '&larr;', // 前一页箭头
         next: '&rarr;', // 后一页箭头
         fluid: true, // 宽度自适应
@@ -79,8 +80,9 @@ author:morrain
             pause: ele.data('pause'),
             loop: ele.data('loop'),
             keys: ele.data('keys'),
-            dots: ele.data('dots'),
-            arrows: ele.data('arrows'),
+            dot: ele.data('dot'),
+            arrow: ele.data('arrow'),
+            arrowspad: ele.data('arrowspad'),
             prev: ele.data('prev'),
             next: ele.data('next'),
             fluid: ele.data('fluid'),
@@ -151,8 +153,8 @@ author:morrain
         });
 
         //添加点和箭头导航
-        _.o.dots && _._nav('dot');
-        _.o.arrows && _._nav('arrow');
+        _.o.dot && _._nav('dot');
+        _.o.arrow && _._nav('arrow');
 
         //图片自适应调整
         _.o.fluid && $(window).resize(function () {
@@ -256,16 +258,32 @@ author:morrain
             });
             html += '</ol>';
         } else {
-            html = '<div class="arrows">';
-            html += '<div class="arrow prev">' + _.o.prev + '</div>';
-            html += '<div class="arrow next">' + _.o.next + '</div>';
-            html += '</div>';
+            var top = _.ele.outerHeight() / 2 - 25;
+            html = '<div class="arrow prev" style="left:' + _.o.arrowspad + 'px;top:' + top + 'px">' + '' + '</div>';
+            html += '<div class="arrow next" style="right:' + _.o.arrowspad + 'px;top:' + top + 'px">' + '' + '</div>';
         };
 
-        _.ele.addClass('has-' + name + 's').append(html).find('.' + name).click(function () {
-            var me = $(this);
-            me.hasClass('dot') ? _.to(me.index()) : me.hasClass('prev') ? _.prev() : _.next();
-        });
+        _.ele.addClass('has-' + name + 's').append(html).find('.' + name)
+            .click(function () {
+                var me = $(this);
+                me.hasClass('dot') ? _.to(me.index()) : me.hasClass('prev') ? _.prev() : _.next();
+            }).mousedown(function (event) {
+                var me = $(this);
+                if (me.hasClass('prev'))
+                    me.removeClass('prev').addClass('prevdown');
+                if (me.hasClass('next'))
+                    me.removeClass('next').addClass('nextdown');
+            }).mouseup(function (event) {
+                var me = $(this);
+                if (me.hasClass('prevdown'))
+                    me.removeClass('prevdown').addClass('prev');
+                if (me.hasClass('nextdown'))
+                    me.removeClass('nextdown').addClass('next');
+            }).css({
+                'background-image': function () {
+                    return 'url(img/' + _.o[name] + '.png)';
+                }
+            });;
     };
 
 })(jQuery);

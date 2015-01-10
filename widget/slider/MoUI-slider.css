@@ -113,14 +113,29 @@
   opacity: 1;
 }
 
-.slider .arrows {
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
-  color: #fff;
-}
 .slider .arrow {
-  display: inline;
-  padding-left: 10px;
-  cursor: pointer;
+    position: absolute;
+    cursor: pointer;
+    display: block;    
+    overflow: hidden;
+    width: 40px; 
+    height: 50px; 
+}
+.prev {
+    background-position: -10px -35px;
+}
+.next {
+    background-position: -70px -35px;
+}
+.prev:hover {
+    background-position: -130px -35px;
+}
+.next:hover {
+    background-position: -190px -35px;
+}
+.prevdown {
+    background-position: -250px -35px;
+}
+.nextdown {
+    background-position: -310px -35px;
 }
