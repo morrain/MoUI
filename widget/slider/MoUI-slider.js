@@ -5,40 +5,95 @@ author:morrain
  * ========================================================================
  */
 
-(function ($, f) {
-    var Unslider = function () {
+(function ($) {
+    "use strict";
+
+    var defaultOpitons = {
+        speed: 500, // 动画切换的速度
+        interval: 3000, // 动画切换的时间间隔
+        pause: true, // 鼠标移入进是否暂停
+        loop: true, // 是否循环，最后一张再下一个会循环到第一张
+        keys: false, // 是否支持键盘播放
+        dots: true, // 是否显示点导航条
+        arrows: false, // 是否显示箭头导航条
+        prev: '&larr;', // 前一页箭头
+        next: '&rarr;', // 后一页箭头
+        fluid: true, // 宽度自适应
+        easing: 'swing', //要使用的擦除效果的名称(需要插件支持).默认jQuery提供"linear" 和 "swing".
+        autoplay: true, // 初始化完成后是否自动播放
+        onBefore: function () {}, //切换前回调
+        onAfter: function () {} //切换后回调
+    };
+
+
+    /**
+     * [MoUISlider description]组件接口
+     * 1. 直接调用，使用默认配置初始化组件 如 $('#aa').MoUISlider();
+     * 2. 传入配置，使用传入的配置初始化 如 $('#aa').MoUISlider({fluid:false});
+     * 3. 调用组件方法  如 $('#aa').MoUISlider('update',arg0,arg1);
+     */
+    $.fn.MoUISlider = function () {
+
+        var option = arguments[0],
+            args = 2 <= arguments.length ? Array.prototype.slice.call(arguments, 1) : [],
+            ret = this;
+
+        //支持初始化多个slider
+        this.each(function () {
+            var me = $(this),
+                instance = me.data('MoUI-slider');
+
+            //如果不存在就创建组件实例
+            if (!instance)
+                me.data('MoUI-slider', instance = new MoUISlider(me, option).init(me, option));
+
+            if (typeof option === 'string') {
+                //当为方法调用时 调用组件方法
+                var result = instance[option].apply(instance, args);
+
+                if (result !== undefined) {
+                    // 如果有返回值 退出循环 返回组件的返回值
+                    ret = result;
+                    return false;
+                }
+            }
+        });
+
+        return ret;
+    };
+
+    MoUISlider.prototype.constructor = MoUISlider;
+
+    function MoUISlider() {
         //  Object clone
         var _ = this;
 
         //  Set some options
         _.o = {
             speed: 500, // animation speed, false for no transition (integer or boolean)
-            delay: 3000, // delay between slides, false for no autoplay (integer or boolean)
-            init: 0, // init delay, false for no delay (integer or boolean)
-            pause: !f, // pause on hover (boolean)
-            loop: !f, // infinitely looping (boolean)
-            keys: f, // keyboard shortcuts (boolean)
-            dots: f, // display dots pagination (boolean)
-            arrows: f, // display prev/next arrows (boolean)
+            interval: 3000, // interval between slides, false for no autoplay (integer or boolean)
+            pause: true, // pause on hover (boolean)
+            loop: true, // infinitely looping (boolean)
+            keys: false, // keyboard shortcuts (boolean)
+            dots: false, // display dots pagination (boolean)
+            arrows: false, // display prev/next arrows (boolean)
             prev: '&larr;', // text or html inside prev button (string)
             next: '&rarr;', // same as for prev option
-            fluid: f, // is it a percentage width? (boolean)
-            starting: f, // invoke before animation (function with argument)
-            complete: f, // invoke after animation (function with argument)
-            items: '>ul', // slides container selector
-            item: '>li', // slidable items selector
+            fluid: false, // is it a percentage width? (boolean)
+            onBefore: false, // invoke before animation (function with argument)
+            onAfter: false, // invoke after animation (function with argument)
             easing: 'swing', // easing function to use for animation
             autoplay: true // enable autoplay on initialisation
         };
 
         _.init = function (el, o) {
-            //  Check whether we're passing any options in to Unslider
+            //  Check whether we're passing any options in to MoUISlider
             _.o = $.extend(_.o, o);
 
             _.el = el;
-            _.ul = el.find(_.o.items);
+            _.ul = el.find('>ul');
             _.max = [el.outerWidth() | 0, el.outerHeight() | 0];
-            _.li = _.ul.find(_.o.item).each(function (index) {
+            _.li = _.ul.find('>li').each(function (index) {
                 var me = $(this),
                     width = me.outerWidth(),
                     height = me.outerHeight();
@@ -85,7 +140,7 @@ author:morrain
 
             //  Autoslide
             o.autoplay && setTimeout(function () {
-                if (o.delay | 0) {
+                if (o.interval | 0) {
                     _.play();
 
                     if (o.pause) {
@@ -95,7 +150,7 @@ author:morrain
                         });
                     };
                 };
-            }, o.init | 0);
+            }, 0);
 
             //  Keypresses
             if (o.keys) {
@@ -138,36 +193,10 @@ author:morrain
                 }).resize();
             };
 
-            //  Move support
-            if ($.event.special['move'] || $.Event('move')) {
-                el.on('movestart', function (e) {
-                    if ((e.distX > e.distY && e.distX < -e.distY) || (e.distX < e.distY && e.distX > -e.distY)) {
-                        e.preventDefault();
-                    } else {
-                        el.data("left", _.ul.offset().left / el.width() * 100);
-                    }
-                }).on('move', function (e) {
-                    var left = 100 * e.distX / el.width();
-                    var leftDelta = 100 * e.deltaX / el.width();
-                    _.ul[0].style.left = parseInt(_.ul[0].style.left.replace("%", "")) + leftDelta + "%";
-
-                    _.ul.data("left", left);
-                }).on('moveend', function (e) {
-                    var left = _.ul.data("left");
-                    if (Math.abs(left) > 30) {
-                        var i = left > 0 ? _.i - 1 : _.i + 1;
-                        if (i < 0 || i >= len) i = _.i;
-                        _.to(i);
-                    } else {
-                        _.to(_.i);
-                    }
-                });
-            };
-
             return _;
         };
 
-        //  Move Unslider to a slide index
+        //  Move MoUISlider to a slide index
         _.to = function (index, callback) {
             if (_.t) {
                 _.stop();
@@ -180,10 +209,10 @@ author:morrain
                 current = _.i,
                 target = li.eq(index);
 
-            $.isFunction(o.starting) && !callback && o.starting(el, li.eq(current));
+            $.isFunction(o.onBefore) && !callback && o.onBefore(el, li.eq(current));
 
             //  To slide or not to slide
-            if ((!target.length || index < 0) && o.loop == f) return;
+            if ((!target.length || index < 0) && o.loop == false) return;
 
             //  Check if it's out of bounds
             if (!target.length) index = 0;
@@ -205,7 +234,7 @@ author:morrain
                 }, obj), speed, easing, function (data) {
                     _.i = index;
 
-                    $.isFunction(o.complete) && !callback && o.complete(el, target);
+                    $.isFunction(o.onAfter) && !callback && o.onAfter(el, target);
                 });
             };
         };
@@ -214,7 +243,7 @@ author:morrain
         _.play = function () {
             _.t = setInterval(function () {
                 _.to(_.i + 1);
-            }, _.o.delay | 0);
+            }, _.o.interval | 0);
         };
 
         //  Stop autoplay
@@ -252,21 +281,5 @@ author:morrain
         };
     };
 
-    //  Create a jQuery plugin
-    $.fn.MoUISlider = function (o) {
-        var len = this.length;
 
-        //  Enable multiple-slider support
-        return this.each(function (index) {
-            //  Cache a copy of $(this), so it
-            var me = $(this),
-                key = 'unslider' + (len > 1 ? '-' + ++index : ''),
-                instance = (new Unslider).init(me, o);
-
-            //  Invoke an Unslider instance
-            me.data(key, instance).data('key', key);
-        });
-    };
-
-    Unslider.version = "1.0.0";
-})(jQuery, false);
+})(jQuery);
