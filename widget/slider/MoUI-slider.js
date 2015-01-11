@@ -122,6 +122,17 @@ author:morrain
             'width': _.o.fluid ? ((100 / _.li.length) + '%') : (_.max[0] + 'px')
         });
 
+        //设置轮播图片对应的链接
+        _.li.find('>a').css({
+            'display':'inline-block',
+            'width':function() {
+                return $(this).parent().width() + 'px';
+            },
+            'height':function() {
+                return $(this).parent().height() + 'px';
+            }
+        });
+
         //是否为自动播放
         _.o.autoplay && setTimeout(function () {
 
