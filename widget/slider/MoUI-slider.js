@@ -7,7 +7,7 @@ author:morrain
 
 (function ($) {
     "use strict";
-
+    var aa = 10;
     var defaultOpitons = {
         speed: 500, // 动画切换的速度 单位毫秒
         interval: 2, // 动画切换的时间间隔 单位秒
